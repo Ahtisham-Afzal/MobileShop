@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MobileShop.Models;
 
 namespace MobileShop.Data
 {
@@ -12,5 +13,8 @@ namespace MobileShop.Data
             : base(options)
         {
         }
+        public DbSet<MobileShop.Models.Mobile> Mobile { get; set; }
+        public DbSet<MobileShop.Models.Seller> Seller { get; set; }
+        public DbSet<MobileShop.Models.Manufacturer> Manufacturer { get; set; }
     }
 }
