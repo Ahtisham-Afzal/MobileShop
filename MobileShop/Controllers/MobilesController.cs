@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,18 @@ namespace MobileShop.Controllers
             var applicationDbContext = _context.Mobile.Include(m => m.Manufacturers);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        public async Task<IActionResult> MobileList()
+        {
+            return View(await _context.Mobile.ToListAsync());
+        }
+        public IActionResult SearchForm()
+        {
+            return View();
+        }
+        public async Task<IActionResult> SearchResult(string Name)
+        {
+            return View("Index", await _context.Mobile.Where(a => a.Name.Contains(Name)).ToListAsync());
+        }
         // GET: Mobiles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -46,6 +58,7 @@ namespace MobileShop.Controllers
         }
 
         // GET: Mobiles/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturer, "Id", "Name");
@@ -57,6 +70,8 @@ namespace MobileShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+
         public async Task<IActionResult> Create([Bind("Id,Name,Url,Price,ManufacturerId")] Mobile mobile)
         {
             if (ModelState.IsValid)
@@ -70,6 +85,8 @@ namespace MobileShop.Controllers
         }
 
         // GET: Mobiles/Edit/5
+        [Authorize]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +108,8 @@ namespace MobileShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Url,Price,ManufacturerId")] Mobile mobile)
         {
             if (id != mobile.Id)
@@ -123,6 +142,8 @@ namespace MobileShop.Controllers
         }
 
         // GET: Mobiles/Delete/5
+        [Authorize]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

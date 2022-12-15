@@ -6,12 +6,13 @@
     <title>@ViewData["Title"] - MobileShop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MobileShop</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MobileSellingApplication</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,6 +22,41 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @*///////////////////////////////*@
+
+                       <li>
+                           <div class="dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mobiles
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" tabindex="0" asp-area="" asp-controller="Mobiles" asp-action="Index">Mobiles</a>
+                                <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Mobiles" asp-action="MobileList">Mobile List</a>
+                                <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Mobiles" asp-action="SearchForm">Mobile Search</a>
+                              </div>
+                       </div>
+                       </li>
+                       <li>
+                           <div class="dropdown ml-2">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manufacturer
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" tabindex="0" asp-area="" asp-controller="Manufacturers" asp-action="Index">Manufacturer</a>
+                                <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Manufacturers" asp-action="SearchForm">Manufacturer Search</a>
+                              </div>
+                       </div>
+                       </li>
+                        @*///////////////////////////////*@
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="Index">Mobiles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="MobileList">Mobile List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="SearchForm">Mobile Search</a>
+                        </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -38,7 +74,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - MobileShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - MobileSellingApplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

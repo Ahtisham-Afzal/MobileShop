@@ -24,6 +24,10 @@ namespace MobileShop.Controllers
         {
             return View(await _context.Manufacturer.ToListAsync());
         }
+        public async Task<IActionResult> SearchResult(string Name)
+        {
+            return View("Index", await _context.Manufacturer.Where(a => a.Name.Contains(Name)).ToListAsync());
+        }
 
         // GET: Manufacturers/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -48,7 +52,10 @@ namespace MobileShop.Controllers
         {
             return View();
         }
-
+        public IActionResult SearchForm()
+        {
+            return View();
+        }
         // POST: Manufacturers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
