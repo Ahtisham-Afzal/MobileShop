@@ -144,6 +144,12 @@ namespace MobileShop.Controllers
                 return NotFound();
             }
 
+            List<SellerMobile> sellerMobiles = await _context.SellerMobile.Where<SellerMobile>(a => a.SellerId == seller.Id).ToListAsync();
+            List<Mobile> mobiles = await _context.Mobile.ToListAsync();
+
+
+            ViewData["mobiles"] = mobiles;
+            ViewData["sellerMobiles"] = sellerMobiles;
             return View(seller);
         }
 

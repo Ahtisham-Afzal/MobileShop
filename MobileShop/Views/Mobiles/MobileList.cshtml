@@ -16,10 +16,10 @@
             
             @*===================*@
             
-            <a asp-controller="Books" asp-action="BookDetails" asp-route-id="@mobile.Id">
-                <img id="bookImage" style="width: 80%;" src="@mobile.Url" alt="@mobile.Name" />
+            <a asp-controller="Mobiles" asp-action="MobileDetails" asp-route-id="@mobile.Id">
+                <img id="bookImage"      src="@mobile.Url" alt="@mobile.Name" />
                 <span id="bookTitle">@mobile.Name</span>
-            </a><br/>
+            </a>
             <span id="bookPrice" style="color:green">Rs: @mobile.Price</span>
             <span id="bookQuantity"><input id="quantityInput" type="number" name="bookQuantity" value="" placeholder="0" /></span>
             <span id="bookCartButton"><button id="btn"><span class="fa fa-shopping-cart"></span>Add to Cart</button></span>

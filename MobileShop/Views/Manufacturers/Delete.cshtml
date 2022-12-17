@@ -3,31 +3,58 @@
 @{
     ViewData["Title"] = "Delete";
 }
-
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Manufacturer</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-    </dl>
+@{List<Mobile> mobiles = ViewData["Mobiles"] as List<Mobile>; }
+@if (mobiles.Count() == 0)
+{
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Manufacturer</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Image)
+            </dd>
+        </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
+}
+else
+{
+    <h5 class="bg-warning" style="padding:5px; text-align:center;">Sorry! We cannot delete this company because it is registered as a Manufacturer of Mobile(s)</h5>
+    <table style="text-align:center;">
+        <thead>
+            <tr>
+                <th>Mobile Title</th>
+                <th>Mobile Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mobile in mobiles)
+            {
+                    if (mobile.ManufacturerId == Model.Id)
+                    {
+                        <tr>
+                            <td style="width:200px;">@mobile.Name</td>
+                            <td><img style="width:200px;" src="@mobile.Url" alt="@mobile.Name" /></td>
+                        </tr>
+                    }
+                
+            }
+        </tbody>
+    </table>
+    <h5 class="bg-info" style="padding:5px; text-align:center;">Please delete/update these Mobiles before deletion of Manufacturer.</h5>
+ }

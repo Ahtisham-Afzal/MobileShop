@@ -143,7 +143,7 @@ namespace MobileShop.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["Mobiles"] = await _context.Mobile.Where<Mobile>(a => a.ManufacturerId == id).ToListAsync();
             return View(manufacturer);
         }
 

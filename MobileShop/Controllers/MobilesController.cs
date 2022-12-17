@@ -30,7 +30,7 @@ namespace MobileShop.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
         /*==================================*/
-        public async Task<IActionResult> BookDetails(int? Id)
+        public async Task<IActionResult> MobileDetails(int? Id)
         {
             if (Id == null)
             {
@@ -126,7 +126,16 @@ namespace MobileShop.Controllers
             {
                 return NotFound();
             }
+
+            IList<SellerMobile> sellerMobiles = await _context.SellerMobile.Where<SellerMobile>(a => a.MobileId == mobile.Id).ToListAsync();
+            IList<int> listsellers = new List<int>();
+            foreach (SellerMobile sellerMobile in sellerMobiles)
+            {
+                listsellers.Add(sellerMobile.SellerId);
+            }
+
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturer, "Id", "Name", mobile.ManufacturerId);
+            ViewData["SellerId"] = new MultiSelectList(_context.Seller, "Id", "Name", listsellers.ToArray());
             return View(mobile);
         }
 
@@ -137,8 +146,9 @@ namespace MobileShop.Controllers
         [ValidateAntiForgeryToken]
         [Authorize]
 
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Url,Price,ManufacturerId")] Mobile mobile)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Url,Price,ManufacturerId")] Mobile mobile, List<int> Sellers)
         {
+            var transaction = _context.Database.BeginTransaction();
             if (id != mobile.Id)
             {
                 return NotFound();
@@ -149,7 +159,20 @@ namespace MobileShop.Controllers
                 try
                 {
                     _context.Update(mobile);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
+                    List<SellerMobile> sellerMobile = new List<SellerMobile>();
+                    foreach (int seller in Sellers)
+                    {
+                        sellerMobile.Add(new SellerMobile { SellerId = seller, MobileId = mobile.Id });
+                    }
+                    List<SellerMobile> deleteBookAuthors = await _context.SellerMobile.Where<SellerMobile>(a => a.MobileId == mobile.Id).ToListAsync();
+                    _context.SellerMobile.RemoveRange(deleteBookAuthors);
+                    _context.SaveChanges();
+
+                    _context.SellerMobile.UpdateRange(sellerMobile);
+                    _context.SaveChanges();
+
+                    await transaction.CommitAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -196,7 +219,12 @@ namespace MobileShop.Controllers
         {
             var mobile = await _context.Mobile.FindAsync(id);
             _context.Mobile.Remove(mobile);
-            await _context.SaveChangesAsync();
+            /* await _context.SaveChangesAsync();*/
+
+            _context.SaveChanges();
+            List<SellerMobile> deleteSellerMobiles = await _context.SellerMobile.Where<SellerMobile>(a => a.MobileId == mobile.Id).ToListAsync();
+            _context.SellerMobile.RemoveRange(deleteSellerMobiles);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

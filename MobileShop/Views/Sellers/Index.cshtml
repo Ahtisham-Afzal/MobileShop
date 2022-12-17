@@ -9,7 +9,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"><button class="btn btn-success"><span class="fa fa-plus-square"></span> Add new Seller</button></a>
 </p>
 <table class="table">
     <thead>
@@ -32,12 +32,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
-            <td>
+            <td style="text-align:center;">
                     @if (SignInManager.IsSignedIn(User))
                     {
-                       <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><span>|</span>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> <span>|</span>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                      <a asp-action="Edit" asp-route-id="@item.Id"><span style="color: green;" class="fa fa-edit">&nbsp;&nbsp;</span></a>
+                      <a asp-action="Delete" asp-route-id="@item.Id"><span style="color:red;" class="fa fa-trash"></span></a>
                     }
                 
             </td>
