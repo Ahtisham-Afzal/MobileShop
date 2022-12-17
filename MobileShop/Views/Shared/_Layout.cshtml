@@ -20,7 +20,8 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            @*<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>*@
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="MobileList">Home</a>
                         </li>
                         @*///////////////////////////////*@
 
@@ -39,11 +40,22 @@
                        <li>
                            <div class="dropdown ml-2">
                               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Manufacturer
+                                Manufacturers
                               </button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" tabindex="0" asp-area="" asp-controller="Manufacturers" asp-action="Index">Manufacturer</a>
                                 <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Manufacturers" asp-action="SearchForm">Manufacturer Search</a>
+                              </div>
+                       </div>
+                       </li>
+                       <li>
+                           <div class="dropdown ml-2">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Sellers
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" tabindex="0" asp-area="" asp-controller="Sellers" asp-action="Index">Seller</a>
+                                <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Sellers" asp-action="SearchForm">Seller Search</a>
                               </div>
                        </div>
                        </li>
@@ -66,7 +78,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

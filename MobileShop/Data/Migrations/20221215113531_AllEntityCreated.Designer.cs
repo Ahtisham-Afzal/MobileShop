@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MobileShop.Data;
 
 namespace MobileShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221215113531_AllEntityCreated")]
+    partial class AllEntityCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,28 +334,6 @@ namespace MobileShop.Data.Migrations
                     b.ToTable("Seller");
                 });
 
-            modelBuilder.Entity("MobileShop.Models.SellerMobile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("MobileId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SellerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MobileId");
-
-                    b.HasIndex("SellerId");
-
-                    b.ToTable("SellerMobile");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -446,25 +426,6 @@ namespace MobileShop.Data.Migrations
                     b.Navigation("MobileOrder");
 
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("MobileShop.Models.SellerMobile", b =>
-                {
-                    b.HasOne("MobileShop.Models.Mobile", "Mobiles")
-                        .WithMany()
-                        .HasForeignKey("MobileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MobileShop.Models.Seller", "Sellers")
-                        .WithMany()
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Mobiles");
-
-                    b.Navigation("Sellers");
                 });
 
             modelBuilder.Entity("MobileShop.Models.Manufacturer", b =>

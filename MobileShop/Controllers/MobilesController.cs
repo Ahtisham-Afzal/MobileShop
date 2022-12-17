@@ -23,9 +23,28 @@ namespace MobileShop.Controllers
         // GET: Mobiles
         public async Task<IActionResult> Index()
         {
+
+            ViewData["SellerMobile"] = await _context.SellerMobile.ToListAsync();
+            ViewData["Sellers"] = await _context.Seller.ToListAsync();
             var applicationDbContext = _context.Mobile.Include(m => m.Manufacturers);
             return View(await applicationDbContext.ToListAsync());
         }
+        /*==================================*/
+        public async Task<IActionResult> BookDetails(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            ViewData["SellerMobile"] = await _context.SellerMobile.ToListAsync();
+            ViewData["Sellers"] = await _context.Seller.ToListAsync();
+            var applicationDbContext = _context.Mobile.Include(m => m.Manufacturers).Where(m => m.Id == Id);
+            return View("Index", await applicationDbContext.ToListAsync());
+        }
+
+
+        /*==================================*/
+
         public async Task<IActionResult> MobileList()
         {
             return View(await _context.Mobile.ToListAsync());
@@ -62,6 +81,7 @@ namespace MobileShop.Controllers
         public IActionResult Create()
         {
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturer, "Id", "Name");
+            ViewData["SellerId"] = new SelectList(_context.Seller, "Id", "Name");
             return View();
         }
 
@@ -72,12 +92,19 @@ namespace MobileShop.Controllers
         [ValidateAntiForgeryToken]
         [Authorize]
 
-        public async Task<IActionResult> Create([Bind("Id,Name,Url,Price,ManufacturerId")] Mobile mobile)
+        public async Task<IActionResult> Create([Bind("Id,Name,Url,Price,ManufacturerId")] Mobile mobile, List<int> Sellers)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(mobile);
+                _context.Mobile.Add(mobile);
                 await _context.SaveChangesAsync();
+                List<SellerMobile> sellerMobile = new List<SellerMobile>();
+                foreach (int seller in Sellers)
+                {
+                    sellerMobile.Add(new SellerMobile { SellerId = seller, MobileId = mobile.Id});
+                }
+                _context.SellerMobile.AddRange(sellerMobile);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturer, "Id", "Name", mobile.ManufacturerId);

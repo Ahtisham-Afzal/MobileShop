@@ -16,7 +16,7 @@ namespace MobileShop.Data
         public DbSet<MobileShop.Models.Mobile> Mobile { get; set; }
         public DbSet<MobileShop.Models.Seller> Seller { get; set; }
         public DbSet<MobileShop.Models.Manufacturer> Manufacturer { get; set; }
-        //public DbSet<MobileShop.Models.MobileSeller> MobileSeller { get; set; }
+        public DbSet<MobileShop.Models.SellerMobile> SellerMobile { get; set; }
         public DbSet<MobileShop.Models.Order> Order { get; set; }
 
     }

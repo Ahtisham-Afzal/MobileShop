@@ -26,6 +26,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Manufacturers)
             </th>
+            <th>
+                Sellers
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,13 +39,30 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Url)
+                <img style="width:100px;" src="@item.Url" alt="@item.Name" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Manufacturers.Name)
+                @*@Html.DisplayFor(modelItem => item.Manufacturers.Name)*@
+                <img style="width:100px;" src="@item.Manufacturers.Image" alt="@item.Manufacturers.Name" />
+                </td>
+            <td>
+                @foreach (var seller in ViewData["Sellers"] as List<Seller>)
+                {
+                    foreach (var sellerMobile in ViewData["SellerMobile"] as List<SellerMobile>)
+                    {
+                        if (seller.Id == sellerMobile.SellerId && item.Id == sellerMobile.MobileId)
+                        {
+                            <div id="SellerBox">
+                                <span id="manufacturerName">@seller.Name</span>
+                                @*<img id="manufacturerImage" src="@seller.Image" alt="@seller.Name" />*@
+                            </div>
+
+                        }
+                    }
+                }
             </td>
             <td>
                     @if (SignInManager.IsSignedIn(User))
