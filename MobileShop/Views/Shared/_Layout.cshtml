@@ -20,58 +20,35 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            @*<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>*@
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="MobileList">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="Index">Mobiles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Manufacturers" asp-action="Index">Manufacturer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Sellers" asp-action="Index">Seller</a>
                         </li>
                         @*///////////////////////////////*@
 
-                       <li>
+                       @*<li>
                            <div class="dropdown">
                               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Mobiles
                               </button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" tabindex="0" asp-area="" asp-controller="Mobiles" asp-action="Index">Mobiles</a>
-                                <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Mobiles" asp-action="MobileList">Mobile List</a>
                                 <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Mobiles" asp-action="SearchForm">Mobile Search</a>
                               </div>
                        </div>
-                       </li>
-                       <li>
-                           <div class="dropdown ml-2">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Manufacturers
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" tabindex="0" asp-area="" asp-controller="Manufacturers" asp-action="Index">Manufacturer</a>
-                                <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Manufacturers" asp-action="SearchForm">Manufacturer Search</a>
-                              </div>
-                       </div>
-                       </li>
-                       <li>
-                           <div class="dropdown ml-2">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Sellers
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" tabindex="0" asp-area="" asp-controller="Sellers" asp-action="Index">Seller</a>
-                                <a class="dropdown-item" tabindex="0"asp-area="" asp-controller="Sellers" asp-action="SearchForm">Seller Search</a>
-                              </div>
-                       </div>
-                       </li>
-                        @*///////////////////////////////*@
+                       </li>*@
+                       @*///////////////////////////////*@
+
                         @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="Index">Mobiles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="MobileList">Mobile List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mobiles" asp-action="SearchForm">Mobile Search</a>
-                        </li>*@
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>*@
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

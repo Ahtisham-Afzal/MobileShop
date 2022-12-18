@@ -79,8 +79,8 @@ body {
 #bookImage {
     display: block;
     margin: 0 auto;
-    width: 80%;
-    /*height: 90%;*/
+    width: 70%;
+    height: 70%;
 }
 
 #bookTitle {
@@ -120,10 +120,11 @@ body {
     }
 
 #bookQuantity {
-    width: 45%;
-    margin-left: 5%;
+    width: 25%;
+    margin-left: 15%;
     border-top: 2px dotted grey;
     border-bottom: 2px dotted grey;
+    border-left: 2px dotted grey;
     display: inline-block;
 }
 
@@ -131,6 +132,6 @@ body {
     width: 45%;
     display: inline-block;
     border: none;
-    border-top: 2px dotted grey;
+    /*border-top: 2px dotted grey;
     border-bottom: 2px dotted grey;
-}
+}*/

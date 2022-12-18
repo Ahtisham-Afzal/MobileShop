@@ -45,10 +45,7 @@ namespace MobileShop.Controllers
 
         /*==================================*/
 
-        public async Task<IActionResult> MobileList()
-        {
-            return View(await _context.Mobile.ToListAsync());
-        }
+        
         public IActionResult SearchForm()
         {
             return View();
