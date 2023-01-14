@@ -49,7 +49,8 @@ namespace MobileShop.Controllers
         }
 
         // GET: Manufacturers/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Create()
         {
             return View();
@@ -63,7 +64,8 @@ namespace MobileShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Create([Bind("Id,Name,Image")] Manufacturer manufacturer)
         {
             if (ModelState.IsValid)
@@ -76,7 +78,8 @@ namespace MobileShop.Controllers
         }
 
         // GET: Manufacturers/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,7 +100,8 @@ namespace MobileShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Image")] Manufacturer manufacturer)
         {
             if (id != manufacturer.Id)
@@ -129,7 +133,8 @@ namespace MobileShop.Controllers
         }
 
         // GET: Manufacturers/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -150,7 +155,8 @@ namespace MobileShop.Controllers
         // POST: Manufacturers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var manufacturer = await _context.Manufacturer.FindAsync(id);

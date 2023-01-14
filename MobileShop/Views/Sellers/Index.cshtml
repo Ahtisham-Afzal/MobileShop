@@ -7,13 +7,15 @@
 }
 
 <h1>Index</h1>
-
-<span>
-    <a asp-action="Create" class="btn btn-success"><span class="fa fa-plus-square"></span> Add new Seller</a>
-</span>
-<span>
-    <a asp-action="SearchForm" class="btn btn-success"><span class="fa fa-search"></span> Search Seller</a>
-</span>
+@if (User.IsInRole("Admin") && SignInManager.IsSignedIn(User))
+{
+    <span>
+        <a asp-action="Create" class="btn btn-success"><span class="fa fa-plus-square"></span> Add new Seller</a>
+    </span>
+    <span>
+        <a asp-action="SearchForm" class="btn btn-success"><span class="fa fa-search"></span> Search Seller</a>
+    </span>
+}
 <table class="table mt-1">
     <thead>
         <tr>
@@ -36,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td style="text-align:center;">
-                    @if (SignInManager.IsSignedIn(User))
+                    @if (User.IsInRole("Admin") && SignInManager.IsSignedIn(User))
                     {
                       <a asp-action="Edit" asp-route-id="@item.Id"><span style="color: green;" class="fa fa-edit">&nbsp;&nbsp;</span></a>
                       <a asp-action="Delete" asp-route-id="@item.Id"><span style="color:red;" class="fa fa-trash"></span></a>

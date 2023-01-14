@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿    using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,9 +12,9 @@ namespace MobileShop.Models
         [Required]
         public int Quantity { get; set; }
         [Required]
-        public string status { get; set; }
+        public OrderState status { get; set; }
         [Required]
-        public string Order_date { get; set; }
+        public DateTime LastUpdated { get; set; }
 
         [ForeignKey("MobileOrder")]
         public int MobileId { get; set; }
@@ -21,5 +22,13 @@ namespace MobileShop.Models
         [ForeignKey("Users")]
         public string UserId { get; set; }
         public virtual IdentityUser Users { get; set; }
+    }
+    public enum OrderState
+    {
+        InCart,
+        OrderPlaced,
+        Verifying,
+        Inprocess,
+        Delivered
     }
 }

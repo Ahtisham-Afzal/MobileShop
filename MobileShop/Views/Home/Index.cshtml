@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -23,9 +26,15 @@
                 <span id="bookTitle">@mobile.Name</span>
             </a>
             <span id="bookPrice" style="color:green">Rs: @mobile.Price</span>
-            <span id="bookQuantity"><input id="quantityInput" type="number" name="bookQuantity" value="" placeholder="0" /></span>
-            <span id="bookCartButton"><button id="btn"><span class="fa fa-shopping-cart"></span>Add to Cart</button></span>
-        
+            @if (SignInManager.IsSignedIn(User))
+             {
+               <form asp-controller="Orders" asp-action="Create">
+                    <span id="bookQuantity"><input id="quantityInput" type="number" name="bookQuantity" value="" placeholder="0" /></span>
+                    <input type="hidden" name="MobileId" value="@mobile.Id" />
+                    <input type="hidden" name="MobileId" value="@UserManager.GetUserId(User)" />
+                    <span id="bookCartButton"><button id="btn" type="submit"><span class="fa fa-shopping-cart"></span>Add to Cart</button></span>
+               </form>
+             }
             @*===================*@
         </div>
     }

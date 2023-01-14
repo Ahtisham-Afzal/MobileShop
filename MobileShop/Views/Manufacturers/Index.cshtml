@@ -7,12 +7,15 @@
 }
 
 <h1>Index</h1>
-<span>
-    <a asp-action="Create" class="btn btn-success"><span class="fa fa-plus-square"></span> Add new Manufacturer</a>
-</span>
-<span>
-    <a asp-action="SearchForm" class="btn btn-success"><span class="fa fa-search"></span> Search Manufacturer</a>
-</span>
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <span>
+        <a asp-action="Create" class="btn btn-success"><span class="fa fa-plus-square"></span> Add new Manufacturer</a>
+    </span>
+    <span>
+        <a asp-action="SearchForm" class="btn btn-success"><span class="fa fa-search"></span> Search Manufacturer</a>
+    </span>
+}
 <table class="table mt-1">
     <thead>
         <tr>
@@ -35,7 +38,7 @@
                 <img style="width:100px;" src="@item.Image" alt="@item.Name" />
             </td>
             <td>
-                    @if (SignInManager.IsSignedIn(User))
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><span>|</span>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> <span>|</span>

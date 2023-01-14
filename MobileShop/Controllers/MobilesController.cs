@@ -74,7 +74,7 @@ namespace MobileShop.Controllers
         }
 
         // GET: Mobiles/Create
-        [Authorize]
+        [Authorize (Roles ="Admin")]
         public IActionResult Create()
         {
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturer, "Id", "Name");
@@ -87,7 +87,8 @@ namespace MobileShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
 
         public async Task<IActionResult> Create([Bind("Id,Name,Url,Price,ManufacturerId")] Mobile mobile, List<int> Sellers)
         {
@@ -109,7 +110,8 @@ namespace MobileShop.Controllers
         }
 
         // GET: Mobiles/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -141,7 +143,8 @@ namespace MobileShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
 
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Url,Price,ManufacturerId")] Mobile mobile, List<int> Sellers)
         {
@@ -189,7 +192,8 @@ namespace MobileShop.Controllers
         }
 
         // GET: Mobiles/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
 
         public async Task<IActionResult> Delete(int? id)
         {
@@ -211,6 +215,8 @@ namespace MobileShop.Controllers
 
         // POST: Mobiles/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
